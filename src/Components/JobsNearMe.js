@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import JobsList from "./JobsList";
 import $ from 'jquery';
-// import JobDetailsPage from './JobDetailsPage';
 
 class MyJobs extends Component {
   constructor(props) {
@@ -20,7 +19,7 @@ class MyJobs extends Component {
       beforeSend: function(xhr) {
         xhr.setRequestHeader("Authorization", token);
       },
-      context: this, // Allows us to use this.setState inside success
+      context: this,
       success: result => {
         this.setState({
           jobs: result
