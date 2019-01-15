@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
-// import NewJob from "./NewJob";
 
 import "../App.css";
 import "./LandingPage.css";
@@ -10,15 +8,14 @@ class landingPage extends Component {
   constructor() {
     super();
     this.state = {
-      // userButtons: null,
-      providerButtons: null
+      buttons: null
     };
   }
 
   buttons = () => {
     if (localStorage.getItem("id_token") !== "undefined") {
       this.setState({
-        userButtons: (
+        buttons: (
           <div>
             <p>
               <button className="btn btn-success">
@@ -42,7 +39,7 @@ class landingPage extends Component {
       });
     } else {
       this.setState({
-        userButtons: (
+        buttons: (
           <div>
             <p>
               <button className="btn btn-success">
@@ -90,7 +87,7 @@ class landingPage extends Component {
         </div>
         <div>
           <span>
-            {this.state.providerButtons}
+            {this.state.buttons}
           </span>
           <footer className="clear" />
         </div>
