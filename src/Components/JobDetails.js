@@ -9,9 +9,10 @@ class JobDetails extends Component {
     super(props);
     this.state = {
       providerButtons: null,
+      estimatedPrice: null,
       providerInfo: null,
       startInfo: null,
-      endInfo: null
+      endInfo: null,
     };
   }
 
@@ -106,6 +107,19 @@ class JobDetails extends Component {
   };
 
   info = () => {
+    if (
+      this.props.job.status === "posted" ||
+      this.props.job.status === "claimed" ||
+      this.props.job.status === "started"
+    ) {
+      this.setState({
+        estimatedPrice: (
+          <div>
+            <p>Estimated Price: $10</p>
+          </div>
+        )
+      });
+    }
     if (
       this.props.job.status === "claimed" ||
       this.props.job.status === "started" ||
