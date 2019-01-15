@@ -9,8 +9,6 @@ class JobDetails extends Component {
     super(props);
     this.state = {
       providerButtons: null,
-      consumerButtons: null,
-      userButtons: null,
       providerInfo: null,
       startInfo: null,
       endInfo: null
@@ -60,79 +58,50 @@ class JobDetails extends Component {
   };
 
   buttons = id => {
-    if (this.props.job.user_id === localStorage.getItem("user_id")) {
-      // this job belongs to the logged in user
-      if (this.props.job.status === "posted") {
-        this.setState({
-          userButtons: (
-            <div>
-              <p>
-                <button className="btn btn-success" onClick={this.deleteRequest.bind(this, id)}>
-                  Cancel Request
-                </button>
-              </p>
-            </div>
-          )
-        });
-      } else if (this.props.job.status === "claimed") {
-      } else if (this.props.job.status === "started") {
-      } else if (this.props.job.status === "completed") {
-        this.setState({
-          userButtons: (
-            <div>
-              <p>
-                <button className="btn btn-success">View Invoice</button>
-              </p>
-            </div>
-          )
-        });
-      }
-    } else {
-      if (this.props.job.status === "posted") {
-        this.setState({
-          providerButtons: (
-            <div>
-              <p>
-                <button className="btn btn-success" onClick={this.claimJob.bind(this, id)}>
-                  Claim Job
-                </button>
-              </p>
-            </div>
-          )
-        });
-      } else if (this.props.job.status === "claimed") {
-        this.setState({
-          providerButtons: (
-            <div>
-              <p>
-                <button className="btn btn-success" onClick={this.startJob.bind(this, id)}>
-                  Start Job
-                </button>
-              </p>
-            </div>
-          )
-        });
-      } else if (this.props.job.status === "started") {
-        this.setState({
-          providerButtons: (
-            <div>
-              <p>
-                <button className="btn btn-success" onClick={this.endJob.bind(this, id)}>End Job</button>
-              </p>
-            </div>
-          )
-        });
-      } else if (this.props.job.status === "completed") {
-        this.setState({
-          providerButtons: (
-            <div>
-              <p>
-                <button className="btn btn-success">View Invoice</button>
-              </p>
-            </div>
-          )
-        });
-      }
+    if (this.props.job.status === "posted") {
+      this.setState({
+        providerButtons: (
+          <div>
+            <p>
+              <button className="btn btn-success" onClick={this.claimJob.bind(this, id)}>
+                Claim Job
+              </button>
+            </p>
+          </div>
+        )
+      });
+    } else if (this.props.job.status === "claimed") {
+      this.setState({
+        providerButtons: (
+          <div>
+            <p>
+              <button className="btn btn-success" onClick={this.startJob.bind(this, id)}>
+                Start Job
+              </button>
+            </p>
+          </div>
+        )
+      });
+    } else if (this.props.job.status === "started") {
+      this.setState({
+        providerButtons: (
+          <div>
+            <p>
+              <button className="btn btn-success" onClick={this.endJob.bind(this, id)}>End Job</button>
+            </p>
+          </div>
+        )
+      });
+    } else if (this.props.job.status === "completed") {
+      this.setState({
+        providerButtons: (
+          <div>
+            <p>
+              <button className="btn btn-success">View Invoice</button>
+            </p>
+          </div>
+        )
+      });
     }
   };
 
@@ -201,7 +170,6 @@ class JobDetails extends Component {
           Job Number: {id}
         </div>
         <div>
-          {this.state.userButtons}
           {this.state.providerButtons}
           <button className="btn btn-success"><Link to="/my_jobs" className="hover_link">My Jobs</Link></button>
         </div>
