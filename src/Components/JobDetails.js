@@ -10,6 +10,7 @@ class JobDetails extends Component {
     this.state = {
       providerButtons: null,
       estimatedPrice: null,
+      location: null,
       providerInfo: null,
       startInfo: null,
       endInfo: null,
@@ -107,6 +108,14 @@ class JobDetails extends Component {
   };
 
   info = () => {
+    this.setState({
+      location: (
+        <div>
+          <p>Posted By: {this.props.job.consumer.first_name}</p>
+          <p>Zip Code: {this.props.job.consumer.zip_code}</p>
+        </div>
+      )
+    })
     if (
       this.props.job.status === "posted" ||
       this.props.job.status === "claimed" ||
@@ -129,6 +138,15 @@ class JobDetails extends Component {
         providerInfo: (
           <div>
             <p>Provider: {this.props.job.provider_name}</p>
+          </div>
+        ),
+        location: (
+          <div>
+            <p>Posted By: {this.props.job.consumer.first_name} {this.props.job.consumer.last_name}</p>
+            <p>Address: {this.props.job.consumer.address}</p>
+            <p>City: {this.props.job.consumer.city}</p>
+            <p>State: {this.props.job.consumer.state}</p>
+            <p>Zip Code: {this.props.job.consumer.zip_code}</p>
           </div>
         )
       });
