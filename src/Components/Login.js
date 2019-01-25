@@ -16,18 +16,18 @@ class Login extends Component {
   onSubmit = event => {
     event.preventDefault();
     axios
-      .post("http://localhost:3001/sessions", {
+      .post("http://localhost:3001/provider_login", {
         email: this.state.email,
         password: this.state.password
       })
       .then(response => {
-        console.log(response.data);
+        // console.log(response.data);
 
         // testing for jwt token
-        console.log("in login request");
+        // console.log("in login request");
         localStorage.setItem("id_token", response.data.jwt);
         localStorage.setItem("provider_status", response.data.provider);
-        localStorage.setItem("user_id", response.data.user_id);
+        localStorage.setItem("user_id", response.data.provider_id);
         this.props.history.replace("/");
         // console.log("this is after the token");
       });
