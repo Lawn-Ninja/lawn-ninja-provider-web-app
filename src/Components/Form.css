@@ -1,0 +1,16 @@
+.form {
+    width: 40%;
+    display: inline-block;
+    text-align: center;
+  }
+  
+  .form-header {
+    font-size: 40px;
+    font-weight: bold;
+    color: green;
+    margin-top: 20px;
+  }
+  
+  .form-body {
+    margin-top: 10px;
+  }
