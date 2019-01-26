@@ -19,6 +19,7 @@ class MyJobs extends Component {
 
     $.ajax({
       url: "http://localhost:3001/my_jobs",
+      data: { job: { user_type: "provider" } },
       type: "GET",
       beforeSend: function(xhr) {
         xhr.setRequestHeader("Authorization", token);
