@@ -10,7 +10,6 @@ import Logout from "../Components/Logout";
 import JobsNearMe from "../Components/JobsNearMe";
 import MyJobs from "../Components/MyJobs";
 import JobDetailsPage from "../Components/JobDetailsPage";
-import NewJob from "../Components/NewJob";
 
 class Home extends Component {
   render() {
@@ -54,7 +53,6 @@ class Home extends Component {
         <Route path="/logout" exact component={Logout} />
         <Route path="/jobs" exact component={JobsNearMe} />
         <Route path="/my_jobs" exact component={MyJobs} />
-        <Route path="/new_job" exact component={NewJob} />
         <Route path="/jobs/:id" exact component={JobDetailsPage} />
       </div>
       // </div>

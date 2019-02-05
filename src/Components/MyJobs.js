@@ -19,6 +19,7 @@ class MyJobs extends Component {
 
     $.ajax({
       url: "http://localhost:3001/my_jobs",
+      data: { job: { user_type: "provider" } },
       type: "GET",
       beforeSend: function(xhr) {
         xhr.setRequestHeader("Authorization", token);
@@ -26,10 +27,10 @@ class MyJobs extends Component {
       context: this, // Allows us to use this.setState inside success
       success: result => {
         this.setState({
-          requestedJobs: result.jobs.requested_jobs,
-          scheduledJobs: result.jobs.scheduled_jobs,
-          startedJobs: result.jobs.in_progress_jobs,
-          completedJobs: result.jobs.completed_jobs
+          requestedJobs: result.requested_jobs,
+          scheduledJobs: result.scheduled_jobs,
+          startedJobs: result.in_progress_jobs,
+          completedJobs: result.completed_jobs
         });
       }
     });

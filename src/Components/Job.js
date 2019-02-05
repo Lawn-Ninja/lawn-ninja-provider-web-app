@@ -6,6 +6,7 @@ import FriendlyTime from "./FriendlyTime";
 class Job extends Component {
   render() {
     const { id, requested_time, status, consumer } = this.props.job;
+    console.log(this.props.job);
 
     return (
       <div>

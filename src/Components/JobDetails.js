@@ -27,6 +27,7 @@ class JobDetails extends Component {
 
   claimJob = id => {
     var provider_id = localStorage.getItem("user_id");
+    // console.log(provider_id);
     var params = { job: { provider_id: provider_id, status: "claimed" } };
     axios
       .patch("http://localhost:3001/jobs/" + this.props.job.id, params)
