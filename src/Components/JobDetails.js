@@ -25,6 +25,11 @@ class JobDetails extends Component {
       });
   };
 
+  updateJob = job => {
+    this.buttons(job);
+    this.info(job);
+  };
+
   claimJob = id => {
     var provider_id = localStorage.getItem("user_id");
     // console.log(provider_id);
@@ -32,10 +37,9 @@ class JobDetails extends Component {
     axios
       .patch("http://localhost:3001/jobs/" + this.props.job.id, params)
       .then(response => {
-        console.log(response.data);
+        console.log(response.data.job);
+        this.updateJob(response.data.job);
       });
-    this.buttons();
-    this.info();
   };
 
   startJob = id => {
@@ -44,9 +48,8 @@ class JobDetails extends Component {
       .patch("http://localhost:3001/jobs/" + this.props.job.id, params)
       .then(response => {
         console.log(response.data);
+        this.updateJob(response.data.job);
       });
-    this.buttons();
-    this.info();
   };
 
   endJob = id => {
@@ -55,47 +58,46 @@ class JobDetails extends Component {
       .patch("http://localhost:3001/jobs/" + this.props.job.id, params)
       .then(response => {
         console.log(response.data);
+        this.updateJob(response.data.job);
       });
-    this.buttons();
-    this.info();
   };
 
-  buttons = id => {
-    if (this.props.job.status === "posted") {
+  buttons = job => {
+    if (job.status === "posted") {
       this.setState({
         providerButtons: (
           <div>
             <p>
-              <button className="btn btn-success" onClick={this.claimJob.bind(this, id)}>
+              <button className="btn btn-success" onClick={this.claimJob.bind(this)}>
                 Claim Job
               </button>
             </p>
           </div>
         )
       });
-    } else if (this.props.job.status === "claimed") {
+    } else if (job.status === "claimed") {
       this.setState({
         providerButtons: (
           <div>
             <p>
-              <button className="btn btn-success" onClick={this.startJob.bind(this, id)}>
+              <button className="btn btn-success" onClick={this.startJob.bind(this)}>
                 Start Job
               </button>
             </p>
           </div>
         )
       });
-    } else if (this.props.job.status === "started") {
+    } else if (job.status === "started") {
       this.setState({
         providerButtons: (
           <div>
             <p>
-              <button className="btn btn-success" onClick={this.endJob.bind(this, id)}>End Job</button>
+              <button className="btn btn-success" onClick={this.endJob.bind(this)}>End Job</button>
             </p>
           </div>
         )
       });
-    } else if (this.props.job.status === "completed") {
+    } else if (job.status === "completed") {
       this.setState({
         providerButtons: (
           <div>
@@ -108,7 +110,7 @@ class JobDetails extends Component {
     }
   };
 
-  info = () => {
+  info = job => {
     this.setState({
       location: (
         <div>
@@ -118,9 +120,9 @@ class JobDetails extends Component {
       )
     })
     if (
-      this.props.job.status === "posted" ||
-      this.props.job.status === "claimed" ||
-      this.props.job.status === "started"
+      job.status === "posted" ||
+      job.status === "claimed" ||
+      job.status === "started"
     ) {
       this.setState({
         estimatedPrice: (
@@ -131,14 +133,14 @@ class JobDetails extends Component {
       });
     }
     if (
-      this.props.job.status === "claimed" ||
-      this.props.job.status === "started" ||
-      this.props.job.status === "completed"
+      job.status === "claimed" ||
+      job.status === "started" ||
+      job.status === "completed"
     ) {
       this.setState({
         providerInfo: (
           <div>
-            <p>Provider: {this.props.job.provider_name}</p>
+            <p>Provider: {job.provider_name}</p>
           </div>
         ),
         location: (
@@ -153,22 +155,22 @@ class JobDetails extends Component {
       });
     }
     if (
-      this.props.job.status === "started" ||
-      this.props.job.status === "completed"
+      job.status === "started" ||
+      job.status === "completed"
     ) {
       this.setState({
         startInfo: (
           <div>
-            <p>Start Time: <FriendlyTime time={this.props.job.start_time} /></p>
+            <p>Start Time: <FriendlyTime time={job.start_time} /></p>
           </div>
         )
       });
     }
-    if (this.props.job.status === "completed") {
+    if (job.status === "completed") {
       this.setState({
         endInfo: (
           <div>
-            <p>End Time: <FriendlyTime time={this.props.job.end_time} /></p>
+            <p>End Time: <FriendlyTime time={job.end_time} /></p>
           </div>
         )
       });
@@ -177,8 +179,8 @@ class JobDetails extends Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.job !== prevProps.job) {
-      this.buttons();
-      this.info();
+      this.buttons(this.props.job);
+      this.info(this.props.job);
     }
   }
 
