@@ -37,8 +37,8 @@ class JobDetails extends Component {
     axios
       .patch("http://localhost:3001/jobs/" + this.props.job.id, params)
       .then(response => {
-        console.log(response.data.job);
-        this.updateJob(response.data.job);
+        console.log(response.data);
+        this.updateJob(response.data);
       });
   };
 
@@ -48,7 +48,7 @@ class JobDetails extends Component {
       .patch("http://localhost:3001/jobs/" + this.props.job.id, params)
       .then(response => {
         console.log(response.data);
-        this.updateJob(response.data.job);
+        this.updateJob(response.data);
       });
   };
 
@@ -58,11 +58,12 @@ class JobDetails extends Component {
       .patch("http://localhost:3001/jobs/" + this.props.job.id, params)
       .then(response => {
         console.log(response.data);
-        this.updateJob(response.data.job);
+        this.updateJob(response.data);
       });
   };
 
   buttons = job => {
+    console.log(job);
     if (job.status === "posted") {
       this.setState({
         providerButtons: (
