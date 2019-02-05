@@ -7,7 +7,6 @@ class MyJobs extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      requestedJobs: [],
       scheduledJobs: [],
       startedJobs: [],
       completedJobs: []
@@ -27,7 +26,6 @@ class MyJobs extends Component {
       context: this, // Allows us to use this.setState inside success
       success: result => {
         this.setState({
-          requestedJobs: result.requested_jobs,
           scheduledJobs: result.scheduled_jobs,
           startedJobs: result.in_progress_jobs,
           completedJobs: result.completed_jobs
@@ -39,9 +37,6 @@ class MyJobs extends Component {
   render() {
     return (
       <div className="my-jobs">
-        <div className="requested">
-          <JobsList title={"Requested Jobs"} jobs={this.state.requestedJobs} />
-        </div>
         <div className="scheduled">
           <JobsList title={"Scheduled Jobs"} jobs={this.state.scheduledJobs} />
         </div>
