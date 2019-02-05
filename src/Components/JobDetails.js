@@ -183,13 +183,13 @@ class JobDetails extends Component {
   }
 
   render() {
-    const { id, user_id, requested_time, status, user } = this.props.job;
+    const { id, consumer_id, requested_time, status, consumer } = this.props.job;
 
     return (
       <div className="job-detail">
         <div className="job-detail-info">
           <div>
-            <p>Requested By: {this.props.job.user_name}</p>
+            <p>Requested By: {this.props.job.consumer_name}</p>
           </div>
           <div>
             <p>Requested Time: <FriendlyTime time={requested_time} /></p>
