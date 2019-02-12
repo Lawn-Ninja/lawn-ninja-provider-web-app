@@ -11,19 +11,12 @@ class JobDetails extends Component {
       providerButtons: null,
       estimatedPrice: null,
       location: null,
+      status: null,
       providerInfo: null,
       startInfo: null,
       endInfo: null,
     };
   }
-
-  deleteRequest = id => {
-    axios
-      .delete("http://localhost:3001/jobs/" + this.props.job.id)
-      .then(response => {
-        console.log(response.data);
-      });
-  };
 
   updateJob = job => {
     this.buttons(job);
@@ -32,12 +25,10 @@ class JobDetails extends Component {
 
   claimJob = id => {
     var provider_id = localStorage.getItem("user_id");
-    // console.log(provider_id);
     var params = { job: { provider_id: provider_id, status: "claimed" } };
     axios
       .patch("http://localhost:3001/jobs/" + this.props.job.id, params)
       .then(response => {
-        console.log(response.data);
         this.updateJob(response.data);
       });
   };
@@ -47,7 +38,6 @@ class JobDetails extends Component {
     axios
       .patch("http://localhost:3001/jobs/" + this.props.job.id, params)
       .then(response => {
-        console.log(response.data);
         this.updateJob(response.data);
       });
   };
@@ -57,13 +47,11 @@ class JobDetails extends Component {
     axios
       .patch("http://localhost:3001/jobs/" + this.props.job.id, params)
       .then(response => {
-        console.log(response.data);
         this.updateJob(response.data);
       });
   };
 
   buttons = job => {
-    console.log(job);
     if (job.status === "posted") {
       this.setState({
         providerButtons: (
@@ -117,6 +105,11 @@ class JobDetails extends Component {
         <div>
           <p>Posted By: {this.props.job.consumer.first_name}</p>
           <p>Zip Code: {this.props.job.consumer.zip_code}</p>
+        </div>
+      ),
+      status: (
+        <div>
+          <p>Status: {this.props.job.consumer.status}</p>
         </div>
       )
     })
@@ -197,9 +190,7 @@ class JobDetails extends Component {
           <div>
             <p>Requested Time: <FriendlyTime time={requested_time} /></p>
           </div>
-          <div>
-            <p>Status: {status}</p>
-          </div>
+          {this.state.status}
           {this.state.providerInfo}
           {this.state.startInfo}
           {this.state.endInfo}
