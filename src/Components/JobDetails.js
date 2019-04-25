@@ -103,7 +103,7 @@ class JobDetails extends Component {
         providerButtons: (
           <div>
             <p>
-              <button className="btn btn-success">View Invoice</button>
+              <button className="btn btn-success"><a href={`http://localhost:3001/jobs/${job.id}/invoice`} className="hover_link">View Invoice</a></button>
             </p>
           </div>
         )
